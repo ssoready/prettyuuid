@@ -75,6 +75,12 @@ func TestFormat_Parse(t *testing.T) {
 			ID:      "0000000000000000000000000000000x",
 			WantErr: `"0000000000000000000000000000000x" contains illegal char at position 31`,
 		},
+		{
+			Name:    "bad length and bad prefix",
+			Format:  prettyuuid.MustNewFormat("prefix_", "0123456789abcdef"),
+			ID:      "notprefix_00000000000000000000000000000000x",
+			WantErr: `"notprefix_00000000000000000000000000000000x" does not have expected prefix "prefix_"`,
+		},
 	}
 
 	for _, tt := range testCases {

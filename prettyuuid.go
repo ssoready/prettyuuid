@@ -80,12 +80,12 @@ func (f *Format) Format(uuid [16]byte) string {
 
 // Parse converts a pretty string to a UUID.
 func (f *Format) Parse(s string) ([16]byte, error) {
-	if len(s) != f.len() {
-		return [16]byte{}, fmt.Errorf("%q does not have expected length %v", s, f.len())
-	}
-
 	if !strings.HasPrefix(s, f.prefix) {
 		return [16]byte{}, fmt.Errorf("%q does not have expected prefix %q", s, f.prefix)
+	}
+
+	if len(s) != f.len() {
+		return [16]byte{}, fmt.Errorf("%q does not have expected length %v", s, f.len())
 	}
 
 	var n big.Int
